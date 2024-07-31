@@ -43,10 +43,18 @@ async function run() {
     })
 
 
+    
 
     app.get("/craft", async(req,res)=>{
       const cursor = craftCollection.find();
       const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.get("/craft/:id", async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await craftCollection.findOne(query);
       res.send(result);
     })
 
